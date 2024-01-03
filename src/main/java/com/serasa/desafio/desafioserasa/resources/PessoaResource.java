@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping(value = "/pessoas")
@@ -28,7 +29,7 @@ public class PessoaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> insert(@Valid @RequestBody Pessoa pessoa) {
+    public ResponseEntity<Pessoa> insert(@Valid @RequestBody Pessoa pessoa) throws URISyntaxException {
         Pessoa newPessoa = pessoaService.insert(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newPessoa.getId()).toUri();

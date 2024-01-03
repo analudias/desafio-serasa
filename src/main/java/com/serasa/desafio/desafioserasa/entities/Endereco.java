@@ -1,5 +1,6 @@
 package com.serasa.desafio.desafioserasa.entities;
 
+import com.serasa.desafio.desafioserasa.dto.EnderecoDTO;
 import com.serasa.desafio.desafioserasa.repositories.PessoaRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,16 @@ public class Endereco {
     private String localidade;
     private String uf;
 
-    @OneToOne(mappedBy = "endereco")
+    @OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
     private Pessoa pessoa;
+
+    public Endereco(EnderecoDTO enderecoDTO) {
+        this.cep = enderecoDTO.getCep();
+        this.logradouro = enderecoDTO.getLogradouro();
+        this.complemento = enderecoDTO.getComplemento();
+        this.bairro = enderecoDTO.getBairro();
+        this.localidade = enderecoDTO.getLocalidade();
+        this.uf = enderecoDTO.getUf();
+    }
+
 }

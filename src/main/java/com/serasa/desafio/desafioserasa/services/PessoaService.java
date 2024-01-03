@@ -18,4 +18,8 @@ public class PessoaService {
     public Page<Pessoa> findAllPaged(Pageable pageable) {
         return pessoaRepository.findAll(pageable);
     }
+
+    public Pessoa insert(Pessoa pessoa) {
+        return pessoaRepository.save(pessoa);
+    }
 }

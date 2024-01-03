@@ -1,6 +1,7 @@
 package com.serasa.desafio.desafioserasa.entities;
 
 
+import com.serasa.desafio.desafioserasa.dto.EnderecoDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,12 +27,11 @@ public class Pessoa {
     private String nome;
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
-    private Instant dataNascimento;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "tb_pessoa_perfil",
             joinColumns = @JoinColumn(name = "pessoa_id"),
             inverseJoinColumns = @JoinColumn(name = "perfil_id"))

@@ -16,9 +16,18 @@ public class EnderecoResource {
     public EnderecoDTO findCep(@PathVariable String cep) throws URISyntaxException {
         RestTemplate restTemplate = new RestTemplate();
         URI uri = new URI(String.format("https://viacep.com.br/ws/%s/json", cep));
-        EnderecoDTO entity = restTemplate.getForObject(uri, EnderecoDTO.class);
+        EnderecoDTO dto = restTemplate.getForObject(uri, EnderecoDTO.class);
 
-        return entity;
+        EnderecoDTO enderecoAtualizado = new EnderecoDTO(
+                dto.getCep(),
+                dto.getLogradouro(),
+                dto.getComplemento(),
+                dto.getBairro(),
+                dto.getLocalidade(),
+                dto.getUf()
+        );
+
+        return enderecoAtualizado;
     }
 
 

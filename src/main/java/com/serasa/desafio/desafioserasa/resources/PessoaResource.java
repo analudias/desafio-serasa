@@ -1,13 +1,10 @@
 package com.serasa.desafio.desafioserasa.resources;
 
-import com.serasa.desafio.desafioserasa.dto.EnderecoDTO;
 import com.serasa.desafio.desafioserasa.entities.Pessoa;
 import com.serasa.desafio.desafioserasa.services.PessoaService;
-import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

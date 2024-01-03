@@ -18,11 +18,10 @@ public class EnderecoGateway {
 
         EnderecoDTO enderecoAtualizado = new EnderecoDTO(
                 dto.getCep(),
-                dto.getLogradouro(),
-                dto.getComplemento(),
-                dto.getBairro(),
+                dto.getUf(),
                 dto.getLocalidade(),
-                dto.getUf()
+                dto.getBairro(),
+                dto.getLogradouro()
         );
 
         return enderecoAtualizado;

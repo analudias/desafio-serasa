@@ -2,13 +2,8 @@ package com.serasa.desafio.desafioserasa.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.serasa.desafio.desafioserasa.dto.EnderecoDTO;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,13 +14,15 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_pessoa")
-public class Pessoa {
+@EqualsAndHashCode(of = "id")
+public class Pessoa{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private int idade;
+    private String email;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id")
@@ -40,5 +37,7 @@ public class Pessoa {
 
     private String telefone;
     private int score;
+
+    private String senha;
 
 }

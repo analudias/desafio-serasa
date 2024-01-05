@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.serasa.desafio.desafioserasa.dto.EnderecoDTO;
 import com.serasa.desafio.desafioserasa.repositories.PessoaRepository;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -15,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_endereco")
+@EqualsAndHashCode(of = "id")
 public class Endereco {
 
     @Id

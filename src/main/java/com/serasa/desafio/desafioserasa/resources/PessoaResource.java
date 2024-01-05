@@ -33,4 +33,34 @@ public class PessoaResource {
         return ResponseEntity.created(uri).body(newPessoa);
     }
 
+    @GetMapping(value = "/{nome}")
+    public ResponseEntity<Pessoa> findByName(@PathVariable String nome) {
+        Pessoa pessoa = pessoaService.findByNome(nome);
+        return ResponseEntity.ok().body(pessoa);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Pessoa> update(@PathVariable Long id, @Valid @RequestBody Pessoa entidade) {
+        entidade = pessoaService.update(id, entidade);
+        return ResponseEntity.ok().body(entidade);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
+        pessoaService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/idade/{idade}")
+    public ResponseEntity<Pessoa> findByIdade(@PathVariable int idade) {
+        Pessoa pessoa = pessoaService.findByIdade(idade);
+        return ResponseEntity.ok().body(pessoa);
+    }
+
+    @GetMapping(value = "/cep/{cep}")
+    public ResponseEntity<Pessoa> findByCep(@PathVariable String cep) {
+        Pessoa pessoa = pessoaService.findByCep(cep);
+        return ResponseEntity.ok().body(pessoa);
+    }
+
 }

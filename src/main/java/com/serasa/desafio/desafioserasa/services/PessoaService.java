@@ -29,7 +29,9 @@ public class PessoaService {
 
     @Transactional(readOnly = true)
     public Page<Pessoa> findAllPaged(Pageable pageable) {
-        return pessoaRepository.findAll(pageable);
+        Page<Pessoa> pessoasPage = pessoaRepository.findAll(pageable);
+        pessoasPage.forEach(pessoa -> pessoa.setDescricaoScore(obterDescricaoScore(pessoa.getScore())));
+        return pessoasPage;
     }
 
     public Pessoa insert(Pessoa pessoa) throws URISyntaxException {
@@ -41,15 +43,21 @@ public class PessoaService {
     }
 
     public Pessoa findByNome(String nome) {
-        return pessoaRepository.findByNomeContainingIgnoreCase(nome);
+        Pessoa pessoa = pessoaRepository.findByNomeContainingIgnoreCase(nome);
+        pessoa.setDescricaoScore(obterDescricaoScore(pessoa.getScore()));
+        return pessoa;
     }
 
     public Pessoa findByIdade(int idade) {
-        return pessoaRepository.findByIdadeContainingIgnoreCase(idade);
+        Pessoa pessoa = pessoaRepository.findByIdadeContainingIgnoreCase(idade);
+        pessoa.setDescricaoScore(obterDescricaoScore(pessoa.getScore()));
+        return pessoa;
     }
 
     public Pessoa findByCep(String cep) {
-        return pessoaRepository.findByCepContainingIgnoreCase(cep);
+        Pessoa pessoa = pessoaRepository.findByCepContainingIgnoreCase(cep);
+        pessoa.setDescricaoScore(obterDescricaoScore(pessoa.getScore()));
+        return pessoa;
     }
 
     @Transactional
@@ -80,6 +88,20 @@ public class PessoaService {
         }
         catch (DataIntegrityViolationException e) {
             throw new Exception("Falha de integridade referencial");
+        }
+    }
+
+    public String obterDescricaoScore(int score) {
+        if (score >= 0 && score <= 200) {
+            return "Insuficiente";
+        } else if (score >= 201 && score <= 500) {
+            return "Inaceitável";
+        } else if (score >= 501 && score <= 700) {
+            return "Aceitável";
+        } else if (score >= 701 && score <= 1000) {
+            return "Recomendável";
+        } else {
+            return "Score fora do intervalo especificado";
         }
     }
 }

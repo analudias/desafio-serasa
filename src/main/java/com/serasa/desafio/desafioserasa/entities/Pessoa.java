@@ -40,4 +40,6 @@ public class Pessoa{
 
     private String senha;
 
+    private String descricaoScore;
+
 }
